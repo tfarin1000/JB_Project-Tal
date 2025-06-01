@@ -27,7 +27,7 @@ services:
     networks:
     - net_layer
 
-# creating seperated custom networks- 1 for fe, 1 for be
+# creating custom network
 networks:
   net_layer:
     driver: bridge
