@@ -1,9 +1,33 @@
+name: ExampApp
 services:
   web:
-
+    build: ./fe/
+    ports: 
+    - 5002:5002
+    networks:
+    - net_layer
 
   backend-service:
-
+    build: ./be/
+    # creating dependency for the db
+    depends_on:
+    - mysqldb 
+    ports:
+    - 5001:5001
+    networks:
+    - net_layer
 
   mysqldb:
-      
+    image: mysql:5.7
+    environment:
+      MYSQL_HOST: mysqldb # must give the HOST to the be or else it will use local host and it will not work
+      MYSQL_ROOT_PASSWORD: 123456
+      # create database name crypto_db
+      MYSQL_DATABASE: crypto_db
+    networks:
+    - net_layer
+
+# creating seperated custom networks- 1 for fe, 1 for be
+networks:
+  net_layer:
+    driver: bridge

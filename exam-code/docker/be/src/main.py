@@ -11,9 +11,11 @@ CORS(app, supports_credentials=True)
 
 # MySQL Configuration
 DB_CONFIG = {
-    "host": os.environ.get("MYSQL_HOST", "localhost"),
+    # getting error - Database initialization error (attempt 1/5): 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (111)
+    "host": os.environ.get("MYSQL_HOST", "mysqldb"), # the code tried to reach localhost for its db but it didnt work, when i specify the name of the db and set its value in the docker compose it connecting properly
     "user": os.environ.get("MYSQL_USER", "root"),
-    "password": os.environ.get("MYSQL_PASSWORD", "password"),
+    # getting error - Database initialization error (attempt 2/5): 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: YES) 
+    "password": os.environ.get("MYSQL_PASSWORD", "123456"), # the code try to connect with the password hardcoded that was before (password ) and not from the one docker compose created so i hardcoded the password here
     "database": "crypto_db"
 }
 
@@ -30,6 +32,11 @@ def initialize_database():
     print("Initializing database...")
     max_retries = 5
     retry_delay = 5  # seconds
+    # a dubg to see why access is denied (this confirmed the password is incorrect) (only works after i hardcoded it in the DB_config)
+    print("Connecting to MySQL with:")
+    print(f"Host: {DB_CONFIG['host']}")
+    print(f"User: {DB_CONFIG['user']}")
+    print(f"Password: {DB_CONFIG['password']}")
 
     for attempt in range(max_retries):
         try:

@@ -1,13 +1,14 @@
 # Dockerfile for Backend Service
 FROM python:3.12-slim
 
-
-
-
+#creating a working app directory
+WORKDIR /app
+# copying the app files to the container (main.py, requirements.txt)
+COPY . .
+# install dependecies
 RUN pip install --no-cache-dir -r requirements.txt
 
-
-
-CMD ["python", "main.py"]
-
 EXPOSE 5001
+
+# because the app located in /app and the main.py is in app/src/main.py i need to specify the new location
+CMD ["python", "src/main.py"]
