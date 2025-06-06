@@ -9,7 +9,7 @@ services:
 
   backend-service:
     build: ./be/
-    # creating dependency for the db
+    # creating dependency for the db (the db will first be created and then the backend service itself)
     depends_on:
     - mysqldb 
     ports:
@@ -27,7 +27,7 @@ services:
     networks:
     - net_layer
 
-# creating seperated custom network
+# creating custom network
 networks:
   net_layer:
     driver: bridge
