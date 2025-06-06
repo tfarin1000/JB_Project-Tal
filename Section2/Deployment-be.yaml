@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        # built the image using docker build and saving it in minikube
+        image: backend-image
+        imagePullPolicy: Never # so the image wont be pulled from another registry but my local one
+        env: # i need both env vars here and in the mysql deployment so the be will know where to connect and the mysql will know what to create
+        - name: MYSQL_HOST
+          value: mysqlclusterip  # to connect to mysql pod it needs to connect to mysqlclusterip
+        - name: MYSQL_ROOT_PASSWORD
+          value: "123456"
+        - name: MYSQL_DATABASE
+          value: "crypto_db"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5001

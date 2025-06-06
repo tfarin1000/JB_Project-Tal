@@ -20,14 +20,14 @@ services:
   mysqldb:
     image: mysql:5.7
     environment:
-      MYSQL_HOST: mysqldb # must give the HOST to the be or else it will use local host and it will not work
+      MYSQL_HOST: mysqldb # must give the db HOST name to the BE or else it will use local host and it will not work
       MYSQL_ROOT_PASSWORD: 123456
       # create database name crypto_db
       MYSQL_DATABASE: crypto_db
     networks:
     - net_layer
 
-# creating seperated custom networks- 1 for fe, 1 for be
+# creating seperated custom network
 networks:
   net_layer:
     driver: bridge
