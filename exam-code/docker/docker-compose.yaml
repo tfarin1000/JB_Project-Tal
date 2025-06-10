@@ -24,7 +24,6 @@ services:
   mysqldb:
     image: mysql:5.7
     environment:
-     # MYSQL_HOST: mysqldb # must give the db HOST name else it will use local host and it will not work
       MYSQL_ROOT_PASSWORD: 123456
       # create database name crypto_db
       MYSQL_DATABASE: crypto_db
