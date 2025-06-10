@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: mysql
 spec:
-  replicas: 1
+  replicas: {{ .Values.mysql.replicas }}
   selector:
     matchLabels:
       app: mysql
@@ -14,11 +14,11 @@ spec:
     spec:
       containers: 
       - name: mysql
-        image: mysql:5.7
-        env: # i need both env vars here and in the mysql deployment so the be will know where to connect and the mysql will know what to create
+        image: {{ .Values.mysql.image }}
+        env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "123456"
+          value: {{ .Values.mysql.mysqlCreds.MYSQL_ROOT_PASSWORD | quote }}
         - name: MYSQL_DATABASE
-          value: "crypto_db"
+          value: {{ .Values.mysql.mysqlCreds.MYSQL_DATABASE | quote }}
         ports:
-        - containerPort: 3306
+        - containerPort: {{ .Values.mysql.port }}

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysqlclusterip
+spec:
+  selector:
+    app: mysql
+  type: {{ .Values.services.mysqlclusterip.type }}
+  ports:
+  - port: {{ .Values.services.mysqlclusterip.port }}
+    targetPort: {{ .Values.services.mysqlclusterip.targetPort }}

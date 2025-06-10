@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service  
+spec:
+  selector:
+    app: backend
+  type: {{ .Values.services.beclusterip.type }}
+  ports:
+  - port: {{ .Values.services.beclusterip.port }}
+    targetPort: {{ .Values.services.beclusterip.targetPort }}
