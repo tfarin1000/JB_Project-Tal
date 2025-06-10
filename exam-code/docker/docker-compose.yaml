@@ -1,26 +1,30 @@
 name: ExampApp
 services:
   web:
-    build: ./fe/
+    build: ./fe/ # which folder have the docker file to build
     ports: 
     - 5002:5002
     networks:
     - net_layer
 
   backend-service:
-    build: ./be/
+    build: ./be/ # which folder have the docker file to build
     # creating dependency for the db (the db will first be created and then the backend service itself)
     depends_on:
     - mysqldb 
     ports:
     - 5001:5001
+    environment:
+      MYSQL_HOST: mysqldb # give the db HOST name to the BE service or else it will use local host and it will not work
+      MYSQL_USER: root # give the db user name
+      MYSQL_PASSWORD: 123456 # give the db password to use or else it will use the default "password" from the code
     networks:
     - net_layer
 
   mysqldb:
     image: mysql:5.7
     environment:
-      MYSQL_HOST: mysqldb # must give the db HOST name to the BE or else it will use local host and it will not work
+     # MYSQL_HOST: mysqldb # must give the db HOST name else it will use local host and it will not work
       MYSQL_ROOT_PASSWORD: 123456
       # create database name crypto_db
       MYSQL_DATABASE: crypto_db

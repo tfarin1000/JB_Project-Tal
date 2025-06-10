@@ -20,7 +20,7 @@ spec:
         env: # i need both env vars here and in the mysql deployment so the be will know where to connect and the mysql will know what to create
         - name: MYSQL_HOST
           value: mysqlclusterip  # to connect to mysql pod it needs to connect to mysqlclusterip
-        - name: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_PASSWORD
           value: "123456"
         - name: MYSQL_DATABASE
           value: "crypto_db"

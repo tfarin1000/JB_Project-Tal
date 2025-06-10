@@ -4,7 +4,7 @@ metadata:
   name: mysqlclusterip
 spec:
   selector:
-    app: mysql
+    app: mysql # this needs to be the name of the mysql deployment app because thats the label the servie look for to match itself to
   type: ClusterIP
   ports:
   - port: 3306

@@ -5,7 +5,7 @@ metadata:
   name: backend-service  
 spec:
   selector:
-    app: backend
+    app: backend # this needs to be the name of the be deployment app because thats the label the servie look for to match itself to
   type: ClusterIP
   ports:
   - port: 5001

@@ -4,7 +4,7 @@ metadata:
   name: frontloadbalancer
 spec:
   selector:
-    app: frontend
+    app: frontend # this needs to be the name of the fe deployment app because thats the label the servie look for to match itself to
   type: LoadBalancer
   ports:
     # port that service is exposed on the outside
