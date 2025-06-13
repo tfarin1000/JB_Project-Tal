@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-# this need to be named backend-service becuase in the fe pyhton code it try to reach service named backend-service and becuase in kubernetes the fe go to my be cluster ip i need to named it backend-service
+# this need to be named backend-service becuase in the fe pyhton code it try to reach service named backend-service and becuase in kubernetes the fe go to my be cluster ip i need to name it backend-service
   name: backend-service  
 spec:
   selector:
